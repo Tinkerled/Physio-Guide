@@ -1,0 +1,21 @@
+
+#formCard {
+    padding: 0 20px 20px;
+}
+
+.select-list {
+    margin-top: 40px;
+}
+
+.collapsible-body {
+    padding: 15px 15px 0px;
+    background: #e5e5e5;
+}
+
+#deleteBtn {
+    color: red;
+}
+
+.boutons {
+    padding-right: 20px;
+}
