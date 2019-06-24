@@ -6,22 +6,22 @@ include_once('./classes/Exercice.php');
 class ExerciceDAO
 {
   public static function find($id){
-    $db = Database::getInstance();
+        $db = Database::getInstance();
     
-    try{
-      $pstmt = $db->prepare("SELECT * FROM exercice WHERE ID = :x");
-      $pstmt->execute(array(':x' => $id));
-      $result = $pstmt->fetch(PDO::FETCH_OBJ);
+        try{
+          $pstmt = $db->prepare("SELECT * FROM exercice WHERE ID = :x");
+          $pstmt->execute(array(':x' => $id));
+          $result = $pstmt->fetch(PDO::FETCH_OBJ);
       
-      if($result){
-      $exe = new Exercice();
-      $exe->loadFromObject($result);
-      $pstmt->closeCursor();
-      $pstmt = NULL;
-      Database::close();
-      return $exe;
-      
-      }
+          if($result){
+            $exe = new Exercice();
+            $exe->loadFromObject($result);
+            $pstmt->closeCursor();
+            $pstmt = NULL;
+            Database::close();
+            return $exe;
+        
+          }
     }
     catch (PDOException $ex){
     }

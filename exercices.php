@@ -32,11 +32,15 @@
         <label>Partie du corps</label>
         <select name="partie" class="select-list">
           <option value="" disabled selected>Choisissez une option</option>
-          <option value="1">Épaule</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
+  
+          <?php
+          $parties = $options->findAllPartie();
+          foreach ($parties as $partie) {
+            ?>
+            <option value="<?= $partie ?>"><?= $partie ?></option>
+            <?php
+          }
+          ?>
         </select>
       </div>
     </div>
@@ -46,10 +50,14 @@
       <label>Type d'exercice</label>
       <select class="select-list" name"type[]" multiple>
       <option value="" disabled selected>Choisissez une option</option>
-      <option value="resistance">Résistance</option>
-      <option value="force">Force</option>
-      <option value="isometrie">Isométrie</option>
-      <option value="postop">Post-Op</option>
+      <?php
+      $types = $options->findAllType();
+      foreach ($types as $type) {
+        ?>
+        <option value="<?= $type ?>"><?= $type ?></option>
+        <?php
+      }
+      ?>
       </select>
     </div>
   
@@ -69,8 +77,8 @@
 <div class="col s12 m5 right">
   
   <div class="row">
-    <h5 class="center">Liste des exercices disponibles</h5>
     <ul class="collapsible expandable">
+      <li><h5 class="center">Liste des exercices disponibles</h5></li>
       <?php
       $listeExe = $dao->findAll();
       foreach ($listeExe as $exercice) {
@@ -79,6 +87,8 @@
           <div class="collapsible-header">
             
             <?= $exercice->getNom() ?>
+            <a href="?action=edit&id=<?=$exercice->getId()?>" class="right">
+              <i class="material-icons right">edit</i></a>
           </div>
           <div class="collapsible-body">
             <div class="row">
@@ -87,10 +97,8 @@
   
               </div>
               <div class="col s4 ">
-                <a href="?action=edit&id=<?=$exercice->getId()?>" class="right">
-                  <i class="material-icons right">edit</i></a>
                 <a href="?action=supp&id=<?=$exercice->getId()?>" class="right">
-                  <i class="material-icons right">delete</i></a>
+                  <i class="material-icons right icon-red">delete</i></a>
   
               </div>
             </div>

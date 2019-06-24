@@ -24,11 +24,13 @@ $currentPage = 'index';
 
 include_once('./classes/Exercice.php');
 include_once('./classes/ExerciceDAO.php');
-include_once('./classes/programmeDAO.php');
+include_once('./classes/ProgrammeDAO.php');
+include_once('./classes/OptionDAO.php');
 include('./menu.php');
 
 
 $dao = new ExerciceDAO();
+$options = new OptionDAO();
 
 $id = "";
 $nom = "";
