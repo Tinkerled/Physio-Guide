@@ -23,4 +23,10 @@
 }
 
 .exeListe {
+    padding: 20px;
+}
+
+.exeListe > .chip{
+    margin: 5px;
+    text-align: right;
 }

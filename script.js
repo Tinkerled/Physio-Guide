@@ -12,6 +12,10 @@ function required(field)
     }
 }
 
+$('.voir-exe').click(function(){
+    console.log("clicked");
+    $('.hideSection').slideToggle('slow');
+});
 
 // empecher la formulaire de soumettre quand la fenetre refresh
 if ( window.history.replaceState ) {
