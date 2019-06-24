@@ -1,5 +1,75 @@
+<?php include_once('./header.php');
 
-<form id="formCard" class="col s12 m6 card" method="post" action="index.php"
+
+//$currentPage = 'index';
+
+include_once('./classes/Exercice.php');
+include_once('./classes/ExerciceDAO.php');
+include_once('./classes/ProgrammeDAO.php');
+include_once('./classes/OptionDAO.php');
+
+$dao = new ExerciceDAO();
+$options = new OptionDAO();
+
+$id = "";
+$nom = "";
+$description = "";
+
+$boutonPartie = "Choisir partie";
+
+$action = "inserer";
+$titreForme = "Créer un exercice";
+$textBouton = "Cr&eacute;er";
+$btnAnnuler = "Annuler";
+
+$accomplie = "";
+
+if (isset($_REQUEST['action'])) {
+  switch ($_REQUEST['action']) {
+    
+    case 'supp' : // suppression
+      $exercice = new exercice();
+      $exercice->setId($_REQUEST['id']);
+      $dao->delete($exercice);
+      break;
+    
+    case 'inserer' : // insertion
+      if (isset($_REQUEST['bOK'])) {
+        $exercice = new Exercice();
+        $exercice->setNom($_REQUEST['nom']);
+        $exercice->setDesc($_REQUEST['description']);
+        $dao->create($exercice);
+      }
+      break;
+    
+    case 'edit': // modification
+      $exercice = $dao->find($_REQUEST['id']);
+      if ($exercice != NULL) {
+        $id = $exercice->getId();
+        $nom = $exercice->getNom();
+        $description = $exercice->getDesc();
+        $action = "sauver";
+        $textBouton = "Modifier";
+        $titreForme = "Modifier un exercice";
+      }
+      break;
+    
+    case 'sauver':
+      if (isset($_REQUEST['bOK'])) {
+        $exercice = new Exercice();
+        $exercice->setId($_REQUEST['id']);
+        $exercice->setNom($_REQUEST['nom']);
+        $exercice->setDesc($_REQUEST['description']);
+        $dao->update($exercice);
+      }
+      break;
+  }
+}
+?>
+
+<div class="row">
+
+<form id="formCard" class="col s12 m6 card" method="post" action="exercices.php"
       onsubmit="return required(input_text)">
   <input type="hidden" name="action" value="<?=$action?>" />
   <input type="hidden" name="id" value="<?=$id?>" />
@@ -74,14 +144,14 @@
   </div>
 </form>
 
-<div class="col s12 m5 right">
+<div class="col s12 m5 right exeListe">
   
   <div class="row">
-    <ul class="collapsible expandable">
+    <ul class="collapsible white">
       <li><h5 class="center">Liste des exercices disponibles</h5></li>
       <?php
       $listeExe = $dao->findAll();
-      foreach ($listeExe as $exercice) {
+      foreach (array_reverse($listeExe) as $exercice) {
         ?>
         <li>
           <div class="collapsible-header">
@@ -113,3 +183,6 @@
   </div>
 
 </div>
+
+
+<?php include_once ('footer.php'); ?>

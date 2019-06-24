@@ -1,4 +1,5 @@
 
+// verifier que l'exercice a un nom avant de soumettre
 function required(field)
 {
     if (field.value.length == 0)
@@ -11,20 +12,13 @@ function required(field)
     }
 }
 
+
+// empecher la formulaire de soumettre quand la fenetre refresh
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
 
+
 $(document).ready(function () {
     $('select').material_select();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-});
-
-var elem = document.querySelector('.collapsible.expandable');
-var instance = M.Collapsible.init(elem, {
-    accordion: false
 });
