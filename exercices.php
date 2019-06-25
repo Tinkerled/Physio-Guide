@@ -160,15 +160,15 @@ if (isset($_REQUEST['action'])) {
             <a href="?action=edit&id=<?=$exercice->getId()?>" class="right">
               <i class="material-icons right">edit</i></a>
           </div>
-          <div class="collapsible-body exeListe">
+          <div class="collapsible-body ">
             <div class="row">
-              <div class="col s8">
+              <div class="col s8 exeListe">
                 <?= $exercice->getDesc() ?>
 
-                <img src="./gifs/shoulder1.gif" class="right modal-img" alt="">
+                <img src="media/shoulder1.gif" class="right modal-img" alt="">
     
               </div>
-              <div class="col s4 ">
+              <div class="col s4 grey lighten-4">
                 <a href="?action=supp&id=<?=$exercice->getId()?>" class="right">
                   <i class="material-icons right icon-red">delete</i></a>
 

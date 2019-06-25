@@ -1,7 +1,9 @@
 <?php include_once('./header.php'); ?>
-<h6>Programmes d'entrainement récents</h6>
+<div class="row">
 
-
+  <a href="" class="btn right red ">Nouveau programme</a>
+  <h5>Programmes d'entrainement récents</h5>
+</div>
 
 <!-- Programme -->
 <div class="collection with-header col s10">
@@ -13,29 +15,27 @@
       </p>
       <h6 class="left bold">Durée: ~ 5 min</h6>
 
-      <button class="btn red right voir-exe">commencer</button>
-      <button class="btn right white btn-flat">voir</button>
+      <button href="#modalExecution" class="btn modal-trigger red right voir-exe">commencer</button>
+      <button id="bouton" class="right waves-effect waves-pink waves-lighten-3 btn-flat">voir</button>
     </div>
   </div>
-  <div class="hideSection"></div>
+  
   <!-- Liste des exercices -->
 <?php for($i=1; $i<=10; $i++){ ?>
-
-  <!-- Modal Trigger -->
-  <a href="#modal1" onclick="$('.modal').openModal();" data-target="modal1" class="collection-item">Exercice <?= $i ?>
+  <a href="#modal1" data-target="modal1" class="collection-item modal-trigger collectionContent">Exercice <?= $i ?>
     <i class="material-icons right">edit</i>
     <span class="right black-text">
     3 x 2 rep - 5 sec</span>
   </a>
-  
-
 <?php } ?>
 </div>
-<hr>
 
+<hr>
+<h5>Programmes recus</h5>
+<h5>...</h5>
 <!-- Modal Structure -->
-<div id="#modal1" class="modal white">
-  <img src="./gifs/shoulder1.gif" class="right modal-img" alt="">
+<div id="modal1" class="modal white">
+  <img src="media/shoulder1.gif" class="right modal-img" alt="">
   <div class="modal-content">
     <h4>Exercice <?= $i ?></h4>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aut autem cumque dignissimos earum esse laborum molestiae mollitia, nisi non officiis quaerat quam reprehenderit similique tempore voluptas voluptate! Excepturi expedita molestiae suscipit? Assumenda blanditiis eum fugit illo quidem vitae. Accusamus at itaque nemo quibusdam? Doloremque fugit itaque nesciunt repellendus ullam.</p>
@@ -61,6 +61,18 @@
     </div>
   </div>
   
+</div>
+
+<div id="modalExecution" class="modal">
+  <div class="container">
+    <img src="media/shoulder1.gif" class="right modal-img" alt="">
+    <h5>Exercice 1: Poing contre mur</h5>
+    <h5>5 rep restantes</h5>
+    <h4>5 seconds</h4>
+    <p>Prochain exercice: Coude contre mur 10 x 5 second</p>
+    
+    <a href="#!" class="modal-close btn">Finir</a>
+  </div>
 </div>
 
 <?php include_once ('footer.php'); ?>

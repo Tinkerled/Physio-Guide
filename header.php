@@ -18,13 +18,30 @@ $titre = "Physio-Guide"
   <script src="script.js"></script>
 </head>
 <body class="grey lighten-3">
-
 <?php
 include_once('./classes/Exercice.php');
 include_once('./classes/ExerciceDAO.php');
 include_once('./classes/ProgrammeDAO.php');
 include_once('./classes/OptionDAO.php');
-include('./menu.php');
-
 ?>
+
+<nav class="blue darken-3">
+  <div class="nav-wrapper container">
+    <a href="">
+      <i class="material-icons sidenav-trigger left show-on-medium-and-down">menu</i></a>
+    <a href="index.php" class="brand-logo"><i class="material-icons left">blur_on</i>
+      <?= $titre ?></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="programme.php">Programmes</a></li>
+      <li><a href="exercices.php">Exercices</a></li>
+      <li><a href="profile.php">Profile</a></li>
+    </ul>
+  </div>
+</nav>
+
+<ul id="slide-out" class="sidenav">
+  <li><a href="#!">Second Link</a></li>
+  <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+</ul>
+
 <div class="container bodyContent">

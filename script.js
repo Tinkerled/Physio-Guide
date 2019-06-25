@@ -12,17 +12,28 @@ function required(field)
     }
 }
 
-$('.voir-exe').click(function(){
-    console.log("clicked");
-    $('.hideSection').slideToggle('slow');
+
+$(document).ready(function(){
+    console.log("loaded");
+    $('.parallax').parallax();
+    $('select').material_select();
+    $('.modal-trigger').leanModal();
+    $('.collectionContent').hide();
+    $('.sidenav').sidenav();
+
+    $('.sidenav-trigger').click(function(){
+        $('.sidenav').show();
+    });
+
+    $("#bouton").click(function(){
+        console.log("clicked voir");
+        $('.collectionContent').toggle();
+    });
+
 });
+
 
 // empecher la formulaire de soumettre quand la fenetre refresh
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
-
-
-$(document).ready(function () {
-    $('select').material_select();
-});
