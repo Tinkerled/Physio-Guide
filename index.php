@@ -7,7 +7,7 @@
   </div>
   <div class="container ">
     <div class="row ">
-      <div class="col s6 parLogin">
+      <div class="parLogin">
 
         <div class="card blue darken-2 hoverable">
           <div class="card-content white-text">
@@ -16,7 +16,7 @@
           </div>
           <div class="card-action right-align">
             <a href="#" class="left">Nouveau compte</a>
-            <a href="#modal1" class="btn modal-trigger red white-text">LOGIN</a>
+            <a href="#modalLogin" class="btn modal-trigger red white-text">LOGIN</a>
           </div>
         </div>
       </div>
@@ -57,9 +57,9 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="modalLogin" class="modal">
   <div class="row modal-content valign-center">
-    <div class="col s6 loginTitre">
+    <div class="col s6 loginTitre valign-center">
       <h4>Rebonjour!</h4>
     </div>
     <div class="col s6">
@@ -72,11 +72,11 @@
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Last Name</label>
         </div>
-        <p>
-        <a href="" class="btn wave-effect red">login</a>
-        </p>
+        
       </div>
-      
+      <p>
+        <a href="programme.php" class="btn wave-effect red">login</a>
+      </p>
     </div>
   </div>
   

@@ -27,8 +27,6 @@ include_once('./classes/OptionDAO.php');
 
 <nav class="blue darken-3">
   <div class="nav-wrapper container">
-    <a href="">
-      <i class="material-icons sidenav-trigger left show-on-medium-and-down">menu</i></a>
     <a href="index.php" class="brand-logo"><i class="material-icons left">blur_on</i>
       <?= $titre ?></a>
     <ul class="right hide-on-med-and-down">
@@ -38,10 +36,5 @@ include_once('./classes/OptionDAO.php');
     </ul>
   </div>
 </nav>
-
-<ul id="slide-out" class="sidenav">
-  <li><a href="#!">Second Link</a></li>
-  <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-</ul>
 
 <div class="container bodyContent">

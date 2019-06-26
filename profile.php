@@ -1,9 +1,19 @@
-<?php include_once('./header.php'); ?>
+<?php require_once('./header.php'); ?>
+<div class="section">
+  <h5>Programmes d'entrainement récents</h5>
+  <p>Nom: </p>
+  <p>Status: </p>
+</div>
+<div class="divider"></div>
 <div class="row">
-  <div class="col s6 card">
-    <div class="col-content">
-      <h5>Calendrier</h5>
-      <div id='fullDiv' >
+
+  <div class="col s6">
+    <div class="card card-margin calendar">
+
+
+      <div class="card-title">
+        Juin</div>
+      <div id='fullDiv' class="card-content">
         <ul>
           <li>SUN</li>
           <li>MON</li>
@@ -49,19 +59,22 @@
           <li>4</li>
         </ul>
       </div>
-      
     </div>
   </div>
-  <div class="col s6 card">
-    <div class="col-content">
+
+  <div class="col s6">
+    <div class="card card-margin">
+
       <form action="">
         <input type="text">
         <label for="">Poids</label>
       </form>
-      
     </div>
+
   </div>
+
+
 </div>
 
 
-<?php include_once ('footer.php'); ?>
+<?php include_once('footer.php'); ?>

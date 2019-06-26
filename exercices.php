@@ -144,9 +144,9 @@ if (isset($_REQUEST['action'])) {
   </div>
 </form>
 
-<div class="col s12 m5 right exeListe">
+<div class="col s12 m6 right exeListe">
   
-  <div class="row">
+  <div class=" ">
     <ul class="collapsible white">
       <li><h5 class="center">Liste des exercices disponibles</h5></li>
       <?php
@@ -158,26 +158,25 @@ if (isset($_REQUEST['action'])) {
             
             <?= $exercice->getNom() ?>
             <a href="?action=edit&id=<?=$exercice->getId()?>" class="right">
-              <i class="material-icons right">edit</i></a>
+              <i class="material-icons">edit</i></a>
           </div>
-          <div class="collapsible-body ">
+          <div class="collapsible-body">
             <div class="row">
               <div class="col s8 exeListe">
                 <?= $exercice->getDesc() ?>
-
                 <img src="media/shoulder1.gif" class="right modal-img" alt="">
-    
               </div>
-              <div class="col s4 grey lighten-4">
+              <div class="col s4 ">
                 <a href="?action=supp&id=<?=$exercice->getId()?>" class="right">
                   <i class="material-icons right icon-red">delete</i></a>
-
-                <div class="chip">
+                
+                <div class="chip right">
                   Epaule
                 </div>
-                <div class="chip">
+                <div class="chip right">
                   Isometrie
                 </div>
+                
   
               </div>
             </div>

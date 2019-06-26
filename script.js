@@ -19,11 +19,6 @@ $(document).ready(function(){
     $('select').material_select();
     $('.modal-trigger').leanModal();
     $('.collectionContent').hide();
-    $('.sidenav').sidenav();
-
-    $('.sidenav-trigger').click(function(){
-        $('.sidenav').show();
-    });
 
     $("#bouton").click(function(){
         console.log("clicked voir");
