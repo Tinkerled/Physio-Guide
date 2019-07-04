@@ -1,181 +1,199 @@
-<?php include_once('./header.php'); ?>
+<?php
+require_once('./header.php');
+require_once('./classes/Ligne.php');
+require_once('./classes/LigneDAO.php');
+require_once('./classes/Programme.php');
+require_once('./classes/Exercice.php');
+require_once('./classes/ExerciceDAO.php');
 
-<div class="row">
-  <div class="col s12">
-    <form id="formCard" class="card">
-      <div class="collection">
-      <div class="collection-item card-content">
+$exeDao = new ExerciceDAO();
+$modalExercice = '';
+$action = 'sauver';
 
-        <div class="card-title">
-          Nouveau programme
-        </div>
+if (!isset($_SESSION))
+  session_start();
+
+if (isset($_REQUEST['action']))
+  switch ($_REQUEST['action']) {
     
+    case 'ajouter' :
+      $idExe = $_REQUEST['id'];
+      if (!isset($_SESSION['newPro'])) {
+        $_SESSION['newPro'] = Array();
+      }
+      if (!isset($_SESSION['newPro'][$idExe])) {
+        $exe = $exeDao->find($idExe);
+        $_SESSION['newPro'][$idExe] = new Ligne($exe);
+        
+        // set position, name, description
+        // le idExe devrait etre ligne,
+      }
+      break;
+    
+    case 'delete' :
+      $idExe = $_REQUEST['id'];
+      UNSET($_SESSION['newPro'][$idExe]);
+      break;
+    
+    case 'sauver' :
+      echo "<script>$('#modal1').leanModal('show')</script>";
+      break;
+    
+    case 'annuler' :
+      UNSET($_SESSION['newPro']);
+      session_destroy();
+      break;
+    
+  }
+
+
+?>
+
+<div class="row ">
+  <form class="col s12 l6 card ">
+    <input type="hidden" name="action" value="<?= $action ?>"/>
+    <div class="card-content">
+      <div class="card-title">
+        Nouveau programme
+      </div>
+
       <!-- Nom -->
       <div class="row">
         <div class="input-field col s6">
-          <input id="input_text" type="text" name="nom" length="45"
-                 value="">
+          <input id="input_text" type="text" name="nom" length="45" value="">
           <label for="input_text">Nom de l'exercice</label>
         </div>
-      
-        <div class="col s3 right"><p>id:</p>#</div>
+        <div class="input-field col s6">
+          <label>Type d'entrainement</label>
+          <select name="partie" class="select-list">
+            <option value="" disabled selected>Choisissez une option</option>
+          </select>
+        </div>
       </div>
-    
+
       <!-- Description -->
       <div class="row">
         <div class="input-field col s12 descField">
-          <textarea id="textarea2" class="materialize-textarea" length="250"
-                    name=""></textarea>
+          <textarea id="textarea2" class="materialize-textarea" length="250" name=""></textarea>
           <label for="textarea2">Description de l'exercice</label>
         </div>
       </div>
-    
-      <div class="row typeField">
-        <div class="input-field col s6">
-          <div class="row">
-          
-            <label>Type d'entrainement</label>
-            <select name="partie" class="select-list">
-              <option value="" disabled selected>Choisissez une option</option>
-            
-            </select>
-          </div>
-        </div>
-      
-        <div class="input-field col s6">
-        
-          <label>Type d'exercice</label>
-          <select class="select-list" name"type[]" multiple>
-          <option value="" disabled selected>Choisissez une option</option>
-          
-          </select>
-        </div>
-    
-      </div>
+
+      <!-- OK annuler -->
       <div class="row boutons">
-      
-        <button class="btn waves-effect waves-light right" type="submit" name="bOK" >
-          OK
+        <button href="?action=sauver"
+                class="btn waves-effect waves-light right" type="submit" name="bOK">OK
         </button>
-        <button class="waves-effect waves-red waves-lighten-5 btn-flat">
-          annuler
-        </button>
-    
+        <a href="?action=annuler" class="btn-flat">Annuler</a>
       </div>
-      
-      </div>
-      
-        <!-- Liste des exercices -->
-        
-        <?php for ($i = 1; $i <= 5; $i++) { ?>
-        
-          <a href="#modal1" data-target="modal1"
-             class="collection-item modal-trigger ">Exercice <?= $i ?>
-            <i class="material-icons left">drag_handle</i>
-            <i class="material-icons right">edit</i>
+    </div>
 
-            <span class="right black-text">5 sec</span>
-            <span class="right black-text"> 2 rep <i class="material-icons tiny">keyboard_arrow_right</i></span>
-            <span class="right black-text"> 3 <i class="material-icons tiny">keyboard_arrow_right</i></span>
-          </a>
-        <?php } ?>
-      </div>
-    </form>
-    
-  </div>
-
-</div>
-
-<div class="row">
-  <div class="form" action="#">
-  
-  <ul class="collapsible white">
-    <li><h5 class="center">Liste des exercices disponibles</h5></li>
-    <?php for($i=1; $i<11; $i++) {
-      ?>
-      <li>
-        <div class="collapsible-header black-text">
-          <label>
-            <i class="material-icons">crop_square</i>
-            
-            <input type="checkbox" />
-            <span>Exercice <?= $i ?></span>
-          </label>
-        </div>
-        <div class="collapsible-body ">
-          <div class="row">
-            <div class="col s8 exeListe">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto id in inventore mollitia nisi nobis quasi reprehenderit sunt temporibus ullam! Ad adipisci deleniti fuga optio quisquam reiciendis repellendus suscipit voluptas!</p>
-              
-              <img src="media/shoulder1.gif" class="right modal-img" alt="">
-            
-            </div>
-            <div class="col s4 ">
-              
-              <div class="chip">
-                Epaule
-              </div>
-              <div class="chip">
-                Isometrie
-              </div>
-            
-            </div>
-          </div>
-        
-        </div>
-      </li>
+    <div class="collection">
+      <!-- Liste des exercices du programme -->
       <?php
-    }
-    ?>
-  </ul>
+      if (!isset($_SESSION['newPro']) || Count($_SESSION['newPro']) == 0)
+        echo "<p>Programme vide:</p>
+            <p>Ajoutez des exercices en les selectionnant de la liste.</p>";
+      else {
+        $programme = $_SESSION['newPro'];
+        
+        foreach ($programme as $num => $ligne) {
+          
+          $exercice = $exeDao->find($num);
+          ?>
+          <div class="">
+            <a href="?action=delete&id=<?= $exercice->getId() ?>">
+              <i class="material-icons right">delete</i>
+            </a>
+            <a href="#modal<?= $exercice->getId() ?>" data-target="modal<?= $exercice->getId() ?>"
+               class="collection-item modal-trigger"><?= $exercice->getNom() ?>
+            </a>
 
-  </div>
+            <!-- Modal Structure -->
+            <div id="modal<?= $exercice->getId() ?>" class="modal white modal-content card-content"
+            style="overflow: hidden">
 
-</div>
+                <div class="row">
+                  <img src="media/shoulder1.gif" class="col s4 modal-img" alt="">
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal white">
-  <img src="media/shoulder1.gif" class="right modal-img" alt="">
-  <div class="modal-content">
-    <h4>Exercice <?= $i ?></h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aut autem cumque dignissimos earum esse
-      laborum molestiae mollitia, nisi non officiis quaerat quam reprehenderit similique tempore voluptas voluptate!
-      Excepturi expedita molestiae suscipit? Assumenda blanditiis eum fugit illo quidem vitae. Accusamus at itaque nemo
-      quibusdam? Doloremque fugit itaque nesciunt repellendus ullam.</p>
-
-
-    <div class="chip">
-      Epaule
+                  <div class="col s8 ">
+                    <h4><?= $exercice->getNom() ?></h4>
+                    <p><?= $exercice->getDesc() ?></p>
+                  </div>
+                </div>
+              <div class="row">
+                <form>
+                  <div class="col s2">
+                    <label for="serie">Series</label>
+                    <input type="number" name="serie" min="1" max="5">
+                  </div>
+                  <div class="col s2">
+                    <label for="reps">Reps</label>
+                    <input type="number" id="reps" name="reps" min="1" max="5">
+                  </div>
+                  <div class="col s2">
+                    <label for="poids">Poids ou Temps</label>
+                    <input type="number" name="poids" min="1" max="5">
+                  </div>
+                  <div class="col s2 l6">
+                    <a href="#!" class="modal-close waves-effect blue waves-green btn right">Ok</a>
+                  </div>
+                </form>
+              </div>
+                </div>
+              </div>
+          <?php
+        }
+      }
+      ?>
     </div>
-    <div class="chip">
-      Isometrie
-    </div>
+  </form>
+
+  <div class="form col s12 l6" action="#">
+
+    <ul class="collapsible white">
+      <a href="#" class="btn red right">Ajouter</a>
+
+      <li><h5 class="center">Liste des exercices disponibles</h5></li>
+      <?php
+      $listeExe = $exeDao->findAll();
+      foreach (array_reverse($listeExe) as $exercice) {
+        ?>
+        <li>
+          <div class="collapsible-header black-text">
+            <?= $exercice->getNom() ?>
+            <a href="?action=ajouter&id=<?= $exercice->getId() ?>" class="right">
+              <i class="material-icons">add</i></a>
+          </div>
+          <div class="collapsible-body ">
+            <div class="row">
+              <div class="col s8 exeListe">
+                <?= $exercice->getDesc() ?>
+                <img src="media/shoulder1.gif" class="right modal-img" alt="">
+
+              </div>
+              <div class="col s4 ">
+
+                <div class="chip">
+                  Epaule
+                </div>
+                <div class="chip">
+                  Isometrie
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </li>
+        <?php
+      }
+      ?>
+    </ul>
+
   </div>
 
-  <div class="modal-footer">
-    <form action="#" class="left">
-      <div class="range-field left">
-        <label for="">Series</label>
-        <input type="range" id="test5" min="1" max="5"/>
-      </div>
-      <div class="range-field left">
-        <label for="">Repetitions</label>
-        <input type="range" id="test5" min="0" max="10"/>
-      </div>
-      <div class="range-field left">
-        <label for="">Intensite</label>
-        <input type="range" id="test5" min="0" max="100"/>
-      </div>
-      <div class="range-field left">
-        <label for="">Temps</label>
-        <input type="range" id="test5" min="0" max="10"/>
-      </div>
-    </form>
-    <a href="#!" class="modal-close waves-effect blue waves-green btn right">Ok</a>
-
-  </div>
 </div>
 
-</div>
 
-<?php include_once ('footer.php'); ?>
+<?php require_once('footer.php'); ?>

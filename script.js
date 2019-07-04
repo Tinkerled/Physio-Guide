@@ -1,3 +1,5 @@
+M.AutoInit();
+
 
 // verifier que l'exercice a un nom avant de soumettre
 function required(field)
@@ -13,11 +15,14 @@ function required(field)
 }
 
 
+
 $(document).ready(function(){
     console.log("loaded");
     $('.parallax').parallax();
     $('select').material_select();
+
     $('.modal-trigger').leanModal();
+
     $('.collectionContent').hide();
 
     $("#bouton").click(function(){

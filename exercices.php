@@ -118,7 +118,7 @@ if (isset($_REQUEST['action'])) {
     <div class="input-field col s6">
       
       <label>Type d'exercice</label>
-      <select class="select-list" name"type[]" multiple>
+      <select class="select-list" name"type[] multiple" >
       <option value="" disabled selected>Choisissez une option</option>
       <?php
       $types = $options->findAllType();
